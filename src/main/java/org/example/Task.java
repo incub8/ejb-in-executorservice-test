@@ -1,11 +1,21 @@
 package org.example;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 class Task implements Runnable
 {
     private static final Logger log = LoggerFactory.getLogger(Task.class);
+
+    private final UserTransactionalBean userTransactionalBean;
+
+    @Inject
+    Task(UserTransactionalBean userTransactionalBean)
+    {
+        this.userTransactionalBean = userTransactionalBean;
+    }
 
     @Override
     public void run()
@@ -14,7 +24,7 @@ class Task implements Runnable
 
         try
         {
-            /* ...performing the task... */
+            userTransactionalBean.doTransactionalStuff();
         }
         catch (Exception e)
         {

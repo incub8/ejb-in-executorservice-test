@@ -1,6 +1,6 @@
 package org.example;
 
-import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
@@ -15,7 +15,7 @@ class UserTransactionalBean
 {
     private static final Logger log = LoggerFactory.getLogger(UserTransactionalBean.class);
 
-    @Resource
+    @Inject
     private UserTransaction userTransaction;
 
     public void doTransactionalStuff()

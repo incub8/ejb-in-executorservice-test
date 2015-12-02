@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Stateless
-class StatelessEjb
+public class StatelessEjb
 {
     private static final Logger log = LoggerFactory.getLogger(StatelessEjb.class);
 

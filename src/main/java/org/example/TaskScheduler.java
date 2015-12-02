@@ -2,17 +2,19 @@ package org.example;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.enterprise.concurrent.ManagedScheduledExecutorService;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Startup
+@Singleton
 class TaskScheduler
 {
     private static final Logger log = LoggerFactory.getLogger(TaskScheduler.class);
@@ -28,7 +30,8 @@ class TaskScheduler
         this.taskInstance = taskInstance;
     }
 
-    private void start(@Observes @Initialized(ApplicationScoped.class) Object ignored)
+    @PostConstruct
+    private void start()
     {
         log.info("Starting task");
         Task task = taskInstance.get();
